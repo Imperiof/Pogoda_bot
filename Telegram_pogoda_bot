@@ -2,8 +2,8 @@ import telebot
 from pyowm import OWM
 from pyowm.utils.config import get_default_config
 
-owm = OWM('b47fdd3716d62101b7ccd8819bb4ace2')
-bot = telebot.TeleBot('Api token')
+owm = OWM('token_owm')
+bot = telebot.TeleBot('token_bot')
 config_dict = get_default_config()
 config_dict['language'] = 'ru'
 
