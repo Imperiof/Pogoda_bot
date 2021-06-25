@@ -1,0 +1,34 @@
+import telebot
+from pyowm import OWM
+from pyowm.utils.config import get_default_config
+
+owm = OWM('b47fdd3716d62101b7ccd8819bb4ace2')
+bot = telebot.TeleBot('1711299714:AAGvVvMiGF-OuMbIY_bqEQyAMhTITplysxY')
+config_dict = get_default_config()
+config_dict['language'] = 'ru'
+
+@bot.message_handler(content_types=['text'])
+def send_echo(message):
+	if message.text == "/start":
+		bot.send_message(message.from_user.id, "Введите название города!")
+	else:
+		try:
+			observation = owm.weather_manager().weather_at_place(message.text)
+			w = observation.weather
+			temp = w.temperature('celsius')["temp"]
+			answer = "В городе " + message.text + " сейчас " + w.detailed_status + "\n"
+			answer += "Температура в районе " + str(temp) + "°C" + "\n\n"
+
+			if temp < 10:
+					answer += "В данный момент очень холодно."
+			elif temp < 20:
+					answer += "Сегодня прохладно, лучше одеться потеплее."
+			else:
+					answer += "Температура в норме!"
+
+			bot.send_message(message.chat.id, answer)
+		except:
+			bot.send_message(message.from_user.id, "Неправильное название города!")
+
+bot.polling( none_stop = True)
+input()
