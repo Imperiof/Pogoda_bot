@@ -30,5 +30,5 @@ def send_echo(message):
 		except:
 			bot.send_message(message.from_user.id, "Неправильное название города!")
 
-bot.polling( none_stop = True)
+bot.polling( none_stop = True )
 input()
