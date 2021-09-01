@@ -24,7 +24,7 @@ def send_echo(message):
 			elif temp < 20:
 					answer += "Сегодня прохладно, лучше одеться потеплее."
 			else:
-					answer += "Температура в норме!"
+					answer += "Благоприятная температура!"
 
 			bot.send_message(message.chat.id, answer)
 		except:
